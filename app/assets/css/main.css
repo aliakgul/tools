@@ -1,0 +1,2390 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --c-primary: 15 23 42;
+  --c-accent: 14 165 233;
+  --c-warm: 245 158 11;
+  --c-surface: 248 250 252;
+  --c-text: 15 23 42;
+  --c-muted: 71 85 105;
+  --c-border: 226 232 240;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased;
+  background:
+    radial-gradient(circle at top left, rgb(224 242 254 / 0.7), transparent 34rem),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  color: rgb(var(--c-text));
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-header {
+  @apply sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur;
+}
+
+.site-header__inner {
+  @apply mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 py-3 sm:px-6 lg:grid-cols-[1fr_auto_1fr];
+}
+
+.site-header__brand {
+  @apply flex min-w-0 items-center gap-3 text-slate-950;
+}
+
+.site-header__mark {
+  @apply relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-950 text-white;
+}
+
+.site-header__mark::after {
+  @apply absolute bottom-1.5 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-sky-300 content-[''];
+}
+
+.site-header__mark svg {
+  @apply h-5 w-5;
+}
+
+.site-header__brand-copy {
+  @apply grid min-w-0 gap-0.5;
+}
+
+.site-header__brand-copy strong {
+  @apply truncate text-sm font-black leading-5 text-slate-950 sm:text-base;
+}
+
+.site-header__brand-copy span {
+  @apply hidden truncate text-xs font-bold text-slate-500 sm:block;
+}
+
+.site-header__nav {
+  @apply hidden items-center rounded-lg bg-slate-100 p-1 lg:flex;
+}
+
+.site-header__nav button,
+.site-header__nav a {
+  @apply rounded-md px-3 py-2 text-sm font-black text-slate-600 transition hover:bg-white hover:text-slate-950;
+}
+
+.header-actions {
+  @apply flex items-center justify-end gap-2;
+}
+
+.theme-toggle {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:border-slate-300 hover:text-slate-950;
+}
+
+.language-switch {
+  @apply relative;
+}
+
+.language-switch__trigger {
+  @apply inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-black text-slate-700 transition hover:border-slate-300 hover:text-slate-950;
+}
+
+.language-switch__trigger svg {
+  @apply h-4 w-4;
+}
+
+.language-switch__menu {
+  @apply absolute right-0 top-12 z-30 grid min-w-36 gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-lg;
+}
+
+.language-switch__option {
+  @apply flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950;
+}
+
+.language-switch__option span {
+  @apply w-7 text-xs font-black text-slate-400;
+}
+
+.language-switch__option strong {
+  @apply text-sm font-semibold;
+}
+
+.language-switch__option--active {
+  @apply bg-slate-950 text-white hover:bg-slate-950 hover:text-white;
+}
+
+.language-switch__option--active span {
+  @apply text-slate-300;
+}
+
+.theme-toggle svg {
+  @apply h-5 w-5;
+}
+
+.footer-support {
+  @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-950 bg-slate-950 px-3 text-sm font-black text-white transition hover:border-slate-700 hover:bg-slate-700;
+}
+
+.footer-support svg {
+  @apply h-4 w-4;
+}
+
+.app-mark {
+  @apply relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg;
+  background: var(--app-mark-color);
+  color: var(--app-mark-foreground);
+  box-shadow:
+    inset 0 0 0 1px rgb(15 23 42 / 0.12),
+    0 1px 2px rgb(15 23 42 / 0.12);
+}
+
+.app-mark::after {
+  @apply absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-sm border content-[''];
+  border-color: currentColor;
+  opacity: 0.65;
+}
+
+.app-mark svg {
+  @apply relative z-10;
+}
+
+.app-mark--md {
+  @apply h-11 w-11;
+}
+
+.app-mark--md svg {
+  @apply h-5 w-5;
+}
+
+.app-mark--lg {
+  @apply h-14 w-14;
+}
+
+.app-mark--lg svg {
+  @apply h-6 w-6;
+}
+
+.tool-directory {
+  @apply mx-auto grid w-full max-w-6xl gap-8 px-4 py-8 sm:px-6 lg:py-12;
+}
+
+.tool-directory__header {
+  @apply grid items-end gap-6 border-b border-slate-200 pb-8 md:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)];
+}
+
+.tool-directory__intro {
+  @apply max-w-2xl;
+}
+
+.tool-directory__header h1 {
+  @apply text-3xl font-black text-slate-950 sm:text-4xl;
+}
+
+.tool-directory__intro > p:last-child {
+  @apply mt-3 text-base leading-7 text-slate-600;
+}
+
+.tool-directory__search {
+  @apply flex h-12 items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 shadow-sm transition focus-within:border-sky-500 focus-within:ring-4 focus-within:ring-sky-100;
+}
+
+.tool-directory__search > svg {
+  @apply h-5 w-5 shrink-0 text-slate-400;
+}
+
+.tool-directory__search input {
+  @apply min-w-0 flex-1 bg-transparent text-sm font-semibold text-slate-950 outline-none placeholder:text-slate-400;
+}
+
+.tool-directory__search > span:last-child,
+.tool-group__heading span {
+  @apply inline-flex min-w-7 items-center justify-center rounded-md bg-slate-100 px-2 py-1 text-xs font-black text-slate-500;
+}
+
+.tool-directory__groups {
+  @apply grid gap-9;
+}
+
+.tool-group {
+  @apply grid gap-3;
+}
+
+.tool-group__heading {
+  @apply flex items-center justify-between;
+}
+
+.tool-group__heading h2 {
+  @apply text-sm font-black uppercase tracking-wide text-slate-600;
+}
+
+.tool-grid {
+  @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.tool-card {
+  @apply relative grid min-h-52 grid-cols-[auto_1fr] content-start gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition;
+}
+
+a.tool-card {
+  @apply hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-200;
+}
+
+.tool-card--planned {
+  @apply bg-slate-50 shadow-none;
+}
+
+.tool-card--planned .app-mark {
+  @apply opacity-75 saturate-50;
+}
+
+.tool-card--featured {
+  @apply border-rose-300 bg-gradient-to-br from-rose-50 via-white to-white shadow-md;
+  box-shadow:
+    inset 3px 0 0 #d9466b,
+    0 8px 24px rgb(190 24 93 / 0.1);
+}
+
+a.tool-card--featured:hover {
+  @apply border-rose-400 shadow-lg;
+}
+
+.tool-card__body {
+  @apply min-w-0 self-start pr-5;
+}
+
+.tool-card__category {
+  @apply block truncate text-xs font-bold uppercase tracking-wide text-slate-500;
+}
+
+.tool-card__meta {
+  @apply flex min-w-0 flex-wrap items-center gap-2;
+}
+
+.tool-card__featured-label {
+  @apply inline-flex items-center gap-1 rounded-full bg-rose-100 px-2 py-1 text-[0.65rem] font-black uppercase tracking-wide text-rose-700;
+}
+
+.tool-card__featured-label svg {
+  @apply h-3 w-3;
+}
+
+.tool-card h3 {
+  @apply mt-1.5 text-lg font-black text-slate-950;
+}
+
+.tool-card__body > p {
+  @apply mt-2 text-sm leading-6 text-slate-600;
+}
+
+.tool-card__arrow {
+  @apply absolute right-5 top-5 h-4 w-4 text-slate-400 transition;
+}
+
+a.tool-card:hover .tool-card__arrow {
+  @apply translate-x-0.5 -translate-y-0.5 text-slate-950;
+}
+
+.tool-directory__empty {
+  @apply flex min-h-52 flex-col items-center justify-center gap-4 rounded-lg border border-dashed border-slate-300 bg-white/60 px-6 py-10 text-center;
+}
+
+.tool-directory__empty > svg {
+  @apply h-8 w-8 text-slate-400;
+}
+
+.tool-directory__empty h2 {
+  @apply font-black text-slate-950;
+}
+
+.tool-directory__empty p {
+  @apply mt-1 text-sm text-slate-600;
+}
+
+.tool-directory__empty button {
+  @apply rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-black text-white transition hover:bg-slate-800;
+}
+
+.opml-page {
+  @apply mx-auto grid w-full max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:py-12;
+}
+
+.opml-page__header {
+  @apply flex max-w-3xl items-start gap-4;
+}
+
+.opml-page__header .eyebrow {
+  @apply mb-1.5;
+}
+
+.opml-page__header h1 {
+  @apply text-3xl font-black text-slate-950 sm:text-4xl;
+}
+
+.opml-page__header > p:last-child {
+  @apply mt-3 text-base leading-7 text-slate-600;
+}
+
+.opml-workspace {
+  @apply grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm lg:grid-cols-[minmax(0,1.35fr)_minmax(22rem,0.65fr)];
+}
+
+.opml-editor,
+.opml-output {
+  @apply min-w-0 p-5 sm:p-6;
+}
+
+.opml-output {
+  @apply border-t border-slate-200 bg-slate-50 lg:border-l lg:border-t-0;
+}
+
+.opml-section-heading {
+  @apply mb-5 flex items-start justify-between gap-4;
+}
+
+.opml-section-heading .eyebrow {
+  @apply mb-1.5;
+}
+
+.opml-section-heading h2 {
+  @apply text-xl font-black text-slate-950;
+}
+
+.opml-section-heading > svg {
+  @apply h-6 w-6 text-slate-400;
+}
+
+.opml-feed-count {
+  @apply shrink-0 rounded-md bg-slate-100 px-2.5 py-1.5 text-xs font-bold text-slate-600;
+}
+
+.opml-draft-status {
+  @apply flex shrink-0 items-center gap-1.5 text-xs font-bold text-slate-500;
+}
+
+.opml-draft-status svg {
+  @apply h-4 w-4;
+}
+
+.opml-draft-status .is-spinning {
+  @apply animate-spin;
+}
+
+.opml-import-bar {
+  @apply mb-3 flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 p-2;
+}
+
+.opml-import-mode {
+  @apply flex rounded-md bg-slate-200 p-1;
+}
+
+.opml-import-mode button {
+  @apply h-8 rounded px-2.5 text-xs font-black text-slate-600 transition hover:text-slate-950;
+}
+
+.opml-import-mode button.is-active {
+  @apply bg-white text-slate-950 shadow-sm;
+}
+
+.opml-import {
+  @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 text-sm font-black text-slate-700 transition hover:border-slate-400 hover:text-slate-950;
+}
+
+.opml-import svg,
+.opml-clear-draft svg {
+  @apply h-4 w-4;
+}
+
+.opml-clear-draft {
+  @apply ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 transition hover:bg-rose-50 hover:text-rose-700;
+}
+
+.opml-import-status {
+  @apply mb-4 text-sm font-semibold text-emerald-700;
+}
+
+.opml-import-status--error {
+  @apply text-rose-700;
+}
+
+.opml-field {
+  @apply grid min-w-0 content-start gap-1.5;
+}
+
+.opml-field > span {
+  @apply text-xs font-bold text-slate-700;
+}
+
+.opml-field input {
+  @apply h-11 min-w-0 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/15;
+}
+
+.opml-field small {
+  @apply text-xs font-semibold leading-5 text-rose-700;
+}
+
+.opml-document-title {
+  @apply mb-5 max-w-xl;
+}
+
+.opml-feed-list {
+  @apply grid gap-3;
+}
+
+.opml-feed-row {
+  @apply relative grid min-w-0 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 pt-5 sm:grid-cols-2;
+}
+
+.opml-feed-row legend {
+  @apply px-1 text-xs font-black uppercase text-slate-500;
+}
+
+.opml-field--title,
+.opml-field--url {
+  @apply sm:col-span-2;
+}
+
+.opml-remove-feed {
+  @apply absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-500 transition hover:bg-rose-50 hover:text-rose-700;
+}
+
+.opml-remove-feed svg {
+  @apply h-4 w-4;
+}
+
+.opml-add-feed {
+  @apply mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-4 text-sm font-black text-slate-700 transition hover:border-slate-400 hover:text-slate-950;
+}
+
+.opml-add-feed + .opml-feed-count {
+  @apply ml-3 inline-flex align-middle;
+}
+
+.opml-add-feed svg,
+.opml-actions svg {
+  @apply h-4 w-4;
+}
+
+.opml-privacy-note {
+  @apply mb-4 flex items-start gap-2 rounded-lg border border-sky-200 bg-sky-50 p-3 text-xs font-semibold leading-5 text-sky-900;
+}
+
+.opml-privacy-note svg {
+  @apply mt-0.5 h-4 w-4 shrink-0;
+}
+
+.opml-preview {
+  @apply min-h-72 max-h-[34rem] overflow-auto whitespace-pre-wrap break-all rounded-lg bg-slate-950 p-4 font-mono text-xs leading-6 text-slate-200;
+}
+
+.opml-form-error {
+  @apply mt-3 text-sm font-semibold text-rose-700;
+}
+
+.opml-actions {
+  @apply mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2;
+}
+
+.opml-copy,
+.opml-download {
+  @apply inline-flex h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-black transition;
+}
+
+.opml-copy {
+  @apply border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:text-slate-950;
+}
+
+.opml-download {
+  @apply border border-slate-950 bg-slate-950 text-white hover:bg-slate-800;
+}
+
+.line-sorter-page {
+  @apply mx-auto grid w-full max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:py-12;
+}
+
+.line-sorter-page__header {
+  @apply flex max-w-3xl items-start gap-4;
+}
+
+.line-sorter-page__header .eyebrow {
+  @apply mb-1.5;
+}
+
+.line-sorter-page__header h1 {
+  @apply text-3xl font-black text-slate-950 sm:text-4xl;
+}
+
+.line-sorter-page__header > p:last-child {
+  @apply mt-3 text-base leading-7 text-slate-600;
+}
+
+.line-sorter-workspace {
+  @apply overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm;
+}
+
+.line-sorter-controls {
+  @apply flex flex-wrap items-end gap-3 border-b border-slate-200 bg-slate-50 p-4;
+}
+
+.line-sorter-controls > label:first-child {
+  @apply grid min-w-44 gap-1.5;
+}
+
+.line-sorter-controls > label:first-child span {
+  @apply text-xs font-bold text-slate-700;
+}
+
+.line-sorter-controls select {
+  @apply h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm font-bold text-slate-800 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/15;
+}
+
+.line-sorter-segment {
+  @apply flex rounded-lg bg-slate-200 p-1;
+}
+
+.line-sorter-segment button {
+  @apply inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-xs font-black text-slate-600 transition hover:text-slate-950;
+}
+
+.line-sorter-segment button.is-active {
+  @apply bg-white text-slate-950 shadow-sm;
+}
+
+.line-sorter-segment svg,
+.line-sorter-actions svg,
+.line-sorter-clear svg,
+.line-sorter-privacy svg {
+  @apply h-4 w-4;
+}
+
+.line-sorter-check {
+  @apply flex h-10 items-center gap-2 text-xs font-bold text-slate-700;
+}
+
+.line-sorter-check input {
+  @apply h-4 w-4 accent-sky-600;
+}
+
+.line-sorter-panes {
+  @apply grid lg:grid-cols-2;
+}
+
+.line-sorter-pane {
+  @apply grid min-w-0 grid-rows-[auto_minmax(22rem,1fr)_auto] gap-3 p-5;
+}
+
+.line-sorter-pane--result {
+  @apply border-t border-slate-200 bg-slate-50 lg:border-l lg:border-t-0;
+}
+
+.line-sorter-pane header {
+  @apply flex items-start justify-between gap-3;
+}
+
+.line-sorter-pane header .eyebrow {
+  @apply mb-1;
+}
+
+.line-sorter-pane h2 {
+  @apply text-lg font-black text-slate-950;
+}
+
+.line-sorter-pane header > span {
+  @apply rounded-md bg-slate-100 px-2.5 py-1.5 text-xs font-bold text-slate-600;
+}
+
+.line-sorter-pane textarea {
+  @apply min-h-88 w-full resize-y rounded-lg border border-slate-300 bg-white p-4 font-mono text-sm leading-6 text-slate-950 outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/15;
+}
+
+.line-sorter-pane--result textarea {
+  @apply bg-slate-950 text-slate-100;
+}
+
+.line-sorter-clear,
+.line-sorter-actions button {
+  @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 text-sm font-black text-slate-700 transition hover:border-slate-400 hover:text-slate-950 disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.line-sorter-clear {
+  @apply justify-self-start;
+}
+
+.line-sorter-actions {
+  @apply flex flex-wrap gap-2;
+}
+
+.line-sorter-actions button.is-primary {
+  @apply border-slate-950 bg-slate-950 text-white hover:bg-slate-800 hover:text-white;
+}
+
+.line-sorter-error {
+  @apply text-sm font-semibold text-rose-700;
+}
+
+.line-sorter-privacy {
+  @apply flex items-center gap-2 border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500;
+}
+
+.training-shell {
+  @apply mx-auto flex max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 lg:py-12;
+}
+
+.training-hero {
+  @apply grid items-center gap-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-7 lg:grid-cols-[1fr_25rem];
+}
+
+.training-hero__copy {
+  @apply max-w-3xl;
+}
+
+.training-hero__copy > .app-mark {
+  @apply mb-5;
+}
+
+.eyebrow {
+  @apply mb-3 text-xs font-bold uppercase tracking-[0.18em] text-sky-700;
+}
+
+.training-hero h1 {
+  @apply max-w-3xl text-4xl font-black leading-none text-slate-950 sm:text-5xl lg:text-6xl;
+}
+
+.training-hero p:not(.eyebrow) {
+  @apply mt-5 max-w-2xl text-lg leading-8 text-slate-600;
+}
+
+.training-hero__actions,
+.exercise-actions {
+  @apply mt-6 flex flex-wrap gap-3;
+}
+
+.button {
+  @apply inline-flex h-11 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-bold transition;
+}
+
+.button--primary {
+  @apply border-slate-950 bg-slate-950 text-white shadow-sm hover:bg-slate-800;
+}
+
+.button--ghost {
+  @apply border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:text-slate-950;
+}
+
+.hero-session {
+  @apply rounded-lg border border-slate-200 bg-slate-50 p-4;
+}
+
+.hero-session__top {
+  @apply flex items-start gap-3;
+}
+
+.hero-session__top h2 {
+  @apply text-2xl font-black leading-tight text-slate-950;
+}
+
+.hero-session__meter {
+  @apply mt-5 grid grid-cols-4 gap-2;
+}
+
+.hero-session__meter span {
+  @apply h-20 rounded-lg bg-slate-200;
+}
+
+.hero-session__meter span:nth-child(1),
+.hero-session__meter span:nth-child(3) {
+  @apply bg-sky-300;
+}
+
+.hero-session__meter span:nth-child(2) {
+  @apply bg-amber-300;
+}
+
+.hero-session__meter span:nth-child(4) {
+  @apply bg-emerald-300;
+}
+
+.hero-session__meta {
+  @apply mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-1;
+}
+
+.hero-session__meta span {
+  @apply inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-black text-slate-700;
+}
+
+.hero-session__meta svg {
+  @apply h-4 w-4 text-sky-700;
+}
+
+.hero-session__checklist {
+  @apply mt-3 flex flex-wrap gap-2;
+}
+
+.hero-session__checklist span {
+  @apply rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-600;
+}
+
+.topic-section {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm;
+}
+
+.topic-section__header {
+  @apply mb-4 max-w-3xl;
+}
+
+.topic-section__header p:not(.eyebrow) {
+  @apply text-sm leading-6 text-slate-600;
+}
+
+.topic-strip {
+  @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-7;
+}
+
+.topic-pill {
+  @apply flex min-h-24 flex-col items-start justify-between rounded-lg border border-slate-200 bg-white p-4 text-left font-bold text-slate-700 shadow-sm transition hover:border-sky-300 hover:text-slate-950;
+}
+
+.topic-pill--active {
+  @apply border-slate-950 bg-slate-950 text-white hover:border-slate-950 hover:text-white;
+}
+
+.topic-pill__top {
+  @apply flex w-full items-center justify-between gap-2;
+}
+
+.topic-pill__identity {
+  @apply inline-flex items-center gap-2;
+}
+
+.topic-pill__order {
+  @apply flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-black text-slate-500;
+}
+
+.topic-pill--active .topic-pill__order {
+  @apply bg-sky-300 text-slate-950;
+}
+
+.topic-pill__icon {
+  @apply h-6 w-6;
+}
+
+.workspace-switch {
+  @apply grid gap-2 rounded-lg bg-slate-200 p-1 sm:grid-cols-2;
+}
+
+.workspace-switch button {
+  @apply inline-flex h-12 items-center justify-center gap-2 rounded-md px-4 text-sm font-black text-slate-600 transition hover:bg-white/70 hover:text-slate-950;
+}
+
+.workspace-switch svg {
+  @apply h-5 w-5;
+}
+
+.workspace-switch__item--active {
+  @apply bg-white text-slate-950 shadow-sm;
+}
+
+.tools-section {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:p-5;
+}
+
+.tools-section__header {
+  @apply mb-4 grid gap-3 lg:grid-cols-[0.8fr_1fr] lg:items-end;
+}
+
+.tools-section__header h2 {
+  @apply text-2xl font-black text-slate-950;
+}
+
+.tools-section__header p:not(.eyebrow) {
+  @apply max-w-3xl text-sm leading-6 text-slate-600;
+}
+
+.tools-layout {
+  @apply grid gap-4 lg:grid-cols-[15rem_1fr];
+}
+
+.tools-list {
+  @apply grid gap-2 self-start rounded-lg bg-slate-100 p-1 sm:grid-cols-2 lg:grid-cols-1;
+}
+
+.tools-list__item {
+  @apply inline-flex min-h-12 items-center gap-3 rounded-md px-3 text-left text-sm font-black text-slate-600 transition hover:bg-white/70 hover:text-slate-950;
+}
+
+.tools-list__item svg {
+  @apply h-5 w-5 shrink-0;
+}
+
+.tools-list__item--active {
+  @apply bg-white text-slate-950 shadow-sm;
+}
+
+.tools-panel {
+  @apply min-w-0;
+}
+
+.tools-panel .range-detector,
+.tools-panel .piano-tool {
+  @apply mb-0 shadow-none;
+}
+
+.practice-layout {
+  @apply grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:items-start;
+}
+
+.topic-panel,
+.exercise-panel {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:p-5;
+}
+
+.exercise-panel {
+  @apply lg:sticky lg:top-24;
+}
+
+.topic-panel__header {
+  @apply flex items-start justify-between gap-4;
+}
+
+.topic-panel__header {
+  @apply justify-start;
+}
+
+.topic-panel__icon {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-700;
+}
+
+.topic-panel__icon svg {
+  @apply h-5 w-5;
+}
+
+.topic-panel h2,
+.exercise-panel h2 {
+  @apply text-2xl font-black text-slate-950;
+}
+
+.topic-panel h2 {
+  @apply text-xl;
+}
+
+.topic-panel__concept {
+  @apply mt-4 text-sm leading-6 text-slate-700;
+}
+
+.guidance-box {
+  @apply mt-4 flex gap-3 rounded-lg border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-slate-700;
+}
+
+.guidance-box svg {
+  @apply mt-1 h-5 w-5 shrink-0 text-sky-700;
+}
+
+.checkpoints {
+  @apply mt-4 flex flex-wrap gap-2;
+}
+
+.checkpoints span {
+  @apply rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-semibold text-slate-600;
+}
+
+.topic-visual {
+  @apply mt-4 flex aspect-[16/10] max-h-48 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-0;
+}
+
+.topic-visual__image {
+  @apply h-full w-full object-contain;
+}
+
+.breath-bars {
+  @apply flex h-32 items-end justify-center gap-3;
+}
+
+.breath-bars span {
+  @apply w-8 rounded-t-lg bg-sky-300;
+  animation: breathBar 2.4s ease-in-out infinite;
+}
+
+.breath-bars span:nth-child(1),
+.breath-bars span:nth-child(5) {
+  height: 34%;
+}
+
+.breath-bars span:nth-child(2),
+.breath-bars span:nth-child(4) {
+  height: 62%;
+  animation-delay: 0.15s;
+}
+
+.breath-bars span:nth-child(3) {
+  height: 90%;
+  animation-delay: 0.3s;
+}
+
+.posture-figure {
+  @apply relative mx-auto h-56 w-40;
+}
+
+.posture-figure__line {
+  @apply absolute left-1/2 top-2 h-52 w-px -translate-x-1/2 bg-sky-500;
+}
+
+.posture-figure__head {
+  @apply absolute left-1/2 top-2 h-12 w-12 -translate-x-1/2 rounded-full border-4 border-slate-950 bg-amber-200;
+}
+
+.posture-figure__body {
+  @apply absolute left-1/2 top-16 h-24 w-16 -translate-x-1/2 rounded-full border-4 border-slate-950 bg-white;
+}
+
+.posture-figure__hips {
+  @apply absolute left-1/2 top-36 h-8 w-24 -translate-x-1/2 rounded-full bg-sky-200;
+}
+
+.posture-figure__legs {
+  @apply absolute bottom-0 left-1/2 h-20 w-28 -translate-x-1/2 border-x-8 border-slate-950;
+}
+
+.range-arc {
+  @apply relative mx-auto h-44 max-w-md rounded-t-full border-t-8 border-sky-400;
+}
+
+.range-arc span {
+  @apply absolute bottom-0 h-4 w-4 rounded-full bg-slate-950;
+}
+
+.range-arc span:nth-child(1) {
+  left: 0;
+}
+
+.range-arc span:nth-child(2) {
+  left: 16%;
+  bottom: 35%;
+}
+
+.range-arc span:nth-child(3) {
+  left: 32%;
+  bottom: 60%;
+}
+
+.range-arc span:nth-child(4) {
+  left: 50%;
+  bottom: 72%;
+}
+
+.range-arc span:nth-child(5) {
+  right: 32%;
+  bottom: 60%;
+}
+
+.range-arc span:nth-child(6) {
+  right: 16%;
+  bottom: 35%;
+}
+
+.range-arc span:nth-child(7) {
+  right: 0;
+}
+
+.resonance-rings {
+  @apply relative mx-auto flex h-48 max-w-sm items-center justify-center;
+}
+
+.resonance-rings span {
+  @apply absolute rounded-full border-2 border-sky-400;
+}
+
+.resonance-rings span:nth-child(1) {
+  @apply h-16 w-16 bg-sky-100;
+}
+
+.resonance-rings span:nth-child(2) {
+  @apply h-28 w-28 opacity-80;
+}
+
+.resonance-rings span:nth-child(3) {
+  @apply h-40 w-40 opacity-50;
+}
+
+.resonance-rings span:nth-child(4) {
+  @apply h-48 w-48 opacity-25;
+}
+
+.pitch-ladder {
+  @apply grid h-44 items-end gap-3 sm:grid-cols-5;
+}
+
+.pitch-ladder span {
+  @apply flex min-h-12 items-center justify-center rounded-lg bg-white text-lg font-black text-slate-950 shadow-sm;
+}
+
+.pitch-ladder span:nth-child(2) {
+  @apply mb-5;
+}
+
+.pitch-ladder span:nth-child(3) {
+  @apply mb-10;
+}
+
+.pitch-ladder span:nth-child(4) {
+  @apply mb-16;
+}
+
+.pitch-ladder span:nth-child(5) {
+  @apply mb-24;
+}
+
+.style-swatches {
+  @apply grid gap-3 sm:grid-cols-3;
+}
+
+.style-swatches span {
+  @apply flex min-h-28 items-center justify-center rounded-lg text-lg font-black text-white shadow-sm;
+}
+
+.style-swatches span:nth-child(1) {
+  @apply bg-sky-500;
+}
+
+.style-swatches span:nth-child(2) {
+  @apply bg-amber-500;
+}
+
+.style-swatches span:nth-child(3) {
+  @apply bg-slate-950;
+}
+
+.timer-badge {
+  @apply flex h-10 shrink-0 items-center gap-2 rounded-lg bg-white/10 px-3 font-black text-amber-100;
+}
+
+.practice-player {
+  @apply rounded-lg border border-slate-900 bg-slate-950 p-4 text-white shadow-sm sm:p-5;
+}
+
+.practice-player__header {
+  @apply flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between;
+}
+
+.practice-player__title {
+  @apply min-w-0;
+}
+
+.practice-player__title h2 {
+  @apply text-2xl font-black text-white;
+}
+
+.practice-player .eyebrow {
+  @apply text-sky-200;
+}
+
+.practice-player__controls {
+  @apply mt-4 grid gap-2 sm:grid-cols-[1fr_auto_auto];
+}
+
+.player-button {
+  @apply inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 text-sm font-bold text-white transition hover:border-white/25 hover:bg-white/10;
+}
+
+.player-button svg {
+  @apply h-4 w-4 shrink-0;
+}
+
+.player-button--primary {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:border-sky-200 hover:bg-sky-200 hover:text-slate-950;
+}
+
+.player-button--video {
+  @apply border-red-300 bg-red-500 text-white hover:border-red-200 hover:bg-red-400 hover:text-white;
+}
+
+.practice-progress {
+  @apply mt-4 h-2 overflow-hidden rounded-full bg-white/10;
+}
+
+.practice-progress span {
+  @apply block h-full rounded-full bg-sky-500 transition-all duration-300;
+}
+
+.exercise-picker {
+  @apply mt-5 grid gap-2 sm:grid-cols-2;
+}
+
+.exercise-picker--standalone {
+  @apply mt-0 rounded-lg border border-slate-200 bg-white p-2 shadow-sm;
+}
+
+.exercise-panel > .exercise-picker:first-child {
+  @apply mb-4 mt-0;
+}
+
+.exercise-picker__item {
+  @apply grid min-h-14 grid-cols-[1.25rem_1fr] items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm font-bold text-slate-600 transition hover:border-slate-300 hover:text-slate-950;
+}
+
+.exercise-picker__item svg {
+  @apply h-5 w-5 shrink-0;
+}
+
+.exercise-picker__item--active {
+  @apply border-slate-950 bg-slate-950 text-white hover:border-slate-950 hover:text-white;
+}
+
+.range-detector {
+  @apply mb-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:p-5;
+}
+
+.range-detector__header {
+  @apply flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+}
+
+.range-detector h3 {
+  @apply text-xl font-black text-slate-950;
+}
+
+.range-detector__status {
+  @apply inline-flex h-9 shrink-0 items-center gap-2 rounded-full bg-slate-100 px-3 text-sm font-bold text-slate-600;
+}
+
+.range-detector__status svg {
+  @apply h-4 w-4;
+}
+
+.range-detector__status--active {
+  @apply bg-sky-100 text-sky-800;
+}
+
+.range-detector__modes {
+  @apply mt-4 grid gap-2 rounded-lg bg-slate-100 p-1 sm:grid-cols-2;
+}
+
+.range-detector__modes button {
+  @apply inline-flex h-10 items-center justify-center gap-2 rounded-md px-3 text-sm font-black text-slate-600 transition hover:bg-white/70 hover:text-slate-950;
+}
+
+.range-detector__modes svg {
+  @apply h-4 w-4;
+}
+
+.range-detector__mode--active {
+  @apply bg-white text-slate-950 shadow-sm;
+}
+
+.range-detector__readout {
+  @apply mt-4 grid gap-2 sm:grid-cols-3;
+}
+
+.range-detector__readout div {
+  @apply rounded-lg border border-slate-200 bg-slate-50 p-3;
+}
+
+.range-detector__readout span {
+  @apply block text-xs font-bold uppercase tracking-[0.12em] text-slate-500;
+}
+
+.range-detector__readout strong {
+  @apply mt-1 block text-2xl font-black text-slate-950;
+}
+
+.range-detector__manual-guide {
+  @apply mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3;
+}
+
+.range-detector__manual-heading {
+  @apply flex flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3 sm:flex-row sm:items-start sm:justify-between;
+}
+
+.range-detector__manual-heading h4 {
+  @apply text-lg font-black text-slate-950;
+}
+
+.range-detector__manual-heading > span {
+  @apply inline-flex h-8 items-center rounded-full bg-slate-100 px-3 text-xs font-black uppercase tracking-[0.12em] text-slate-600;
+}
+
+.range-detector__manual-setters {
+  @apply mt-3 grid gap-3 sm:grid-cols-2;
+}
+
+.range-detector__manual-setters label {
+  @apply grid gap-3 rounded-lg border border-slate-200 bg-white p-3;
+}
+
+.range-detector__manual-setters label > span {
+  @apply text-xs font-bold uppercase tracking-[0.12em] text-slate-500;
+}
+
+.range-detector__manual-setters strong {
+  @apply text-4xl font-black leading-none text-slate-950;
+}
+
+.range-detector__note-stepper {
+  @apply grid grid-cols-3 gap-2;
+}
+
+.range-detector__note-stepper button {
+  @apply inline-flex h-11 min-w-0 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-black text-slate-700 transition hover:border-slate-300 hover:text-slate-950 disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.range-detector__note-stepper button:nth-child(2) {
+  @apply bg-slate-950 text-white hover:border-slate-950 hover:bg-slate-800 hover:text-white;
+}
+
+.range-detector__note-stepper button svg {
+  @apply h-4 w-4;
+}
+
+.range-detector__manual-setters select {
+  @apply h-11 rounded-lg border border-slate-300 bg-white px-3 text-base font-black text-slate-950 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-100;
+}
+
+.range-detector__manual-results {
+  @apply mt-3 grid gap-2 sm:grid-cols-3;
+}
+
+.range-detector__manual-results div {
+  @apply grid grid-cols-[1.25rem_1fr] items-center gap-x-3 gap-y-1 rounded-lg border border-slate-200 bg-white px-3 py-3 text-left text-sm font-bold text-slate-600;
+}
+
+.range-detector__manual-results svg {
+  @apply row-span-2 h-5 w-5 text-slate-500;
+}
+
+.range-detector__manual-results strong {
+  @apply text-base font-black text-slate-950;
+}
+
+.range-detector__range-slider {
+  @apply mt-3 rounded-lg border border-slate-200 bg-white p-3;
+}
+
+.range-detector__range-labels,
+.range-detector__range-values {
+  @apply flex items-center justify-between gap-3;
+}
+
+.range-detector__range-labels span {
+  @apply text-xs font-bold uppercase tracking-[0.12em] text-slate-500;
+}
+
+.range-detector__range-values strong {
+  @apply rounded-md bg-slate-100 px-2 py-1 text-sm font-black text-slate-950;
+}
+
+.range-detector__range-control {
+  @apply relative my-5 h-8;
+}
+
+.range-detector__range-track,
+.range-detector__range-fill {
+  @apply pointer-events-none absolute left-0 right-0 top-1/2 h-2 -translate-y-1/2 rounded-full;
+}
+
+.range-detector__range-track {
+  @apply bg-slate-200;
+}
+
+.range-detector__range-fill {
+  @apply bg-sky-400;
+}
+
+.range-detector__range-control input {
+  @apply pointer-events-none absolute left-0 top-1/2 h-8 w-full -translate-y-1/2 appearance-none bg-transparent;
+}
+
+.range-detector__range-control input::-webkit-slider-thumb {
+  @apply pointer-events-auto h-6 w-6 appearance-none rounded-full border-4 border-slate-950 bg-white shadow-sm;
+}
+
+.range-detector__range-control input::-moz-range-thumb {
+  @apply pointer-events-auto h-6 w-6 rounded-full border-4 border-slate-950 bg-white shadow-sm;
+}
+
+.range-detector__summary {
+  @apply mt-3 flex items-center gap-2 rounded-lg bg-slate-950 px-3 py-2 font-black text-white;
+}
+
+.range-detector__summary svg {
+  @apply h-4 w-4 shrink-0;
+}
+
+.range-detector__actions {
+  @apply mt-4 flex flex-wrap gap-2;
+}
+
+.range-detector__actions .button {
+  @apply h-10;
+}
+
+.range-detector__cue {
+  @apply mt-3 text-sm leading-6 text-slate-600;
+}
+
+.range-detector__error {
+  @apply mt-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-bold text-rose-800;
+}
+
+.metronome-tool {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-none sm:p-5;
+}
+
+.metronome-tool__header {
+  @apply flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+}
+
+.metronome-tool h3 {
+  @apply text-xl font-black text-slate-950;
+}
+
+.metronome-tool__status {
+  @apply inline-flex h-9 shrink-0 items-center gap-2 rounded-full bg-slate-100 px-3 text-sm font-bold text-slate-600;
+}
+
+.metronome-tool__status svg {
+  @apply h-4 w-4;
+}
+
+.metronome-tool__status--active {
+  @apply bg-amber-100 text-amber-900;
+}
+
+.metronome-tool__display {
+  @apply mt-4 grid gap-2 sm:grid-cols-[auto_1fr_auto];
+}
+
+.metronome-tool__display button {
+  @apply inline-flex min-h-20 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-slate-700 transition hover:border-slate-300 hover:text-slate-950;
+}
+
+.metronome-tool__display button svg {
+  @apply h-5 w-5;
+}
+
+.metronome-tool__display label {
+  @apply grid gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 text-center;
+}
+
+.metronome-tool__display label span,
+.metronome-tool__settings label > span {
+  @apply text-xs font-bold uppercase tracking-[0.12em] text-slate-500;
+}
+
+.metronome-tool__display label strong {
+  @apply text-4xl font-black leading-none text-slate-950;
+}
+
+.metronome-tool__display input[type="range"] {
+  @apply h-6 w-full cursor-pointer accent-slate-950 outline-none;
+}
+
+.metronome-tool__beats {
+  @apply mt-4 grid grid-flow-col auto-cols-fr gap-2;
+}
+
+.metronome-tool__beats button {
+  @apply flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-sm font-black text-slate-500 transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900;
+}
+
+.metronome-tool__beats button span {
+  @apply transition-transform;
+}
+
+.metronome-tool__beat--active {
+  @apply border-amber-400 bg-amber-400 text-slate-950 shadow-sm;
+}
+
+.metronome-tool__beat--active span {
+  @apply scale-125;
+}
+
+.metronome-tool__settings {
+  @apply mt-4 grid gap-3 sm:grid-cols-[1fr_auto];
+}
+
+.metronome-tool__settings label:not(.metronome-tool__toggle) {
+  @apply grid gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3;
+}
+
+.metronome-tool__settings select {
+  @apply h-11 rounded-lg border border-slate-300 bg-white px-3 text-base font-black text-slate-950 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-100;
+}
+
+.metronome-tool__cue {
+  @apply mt-3 text-sm leading-6 text-slate-600;
+}
+
+.metronome-tool__toggle {
+  @apply flex min-h-16 items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 text-sm font-black text-slate-700;
+}
+
+.metronome-tool__toggle input {
+  @apply h-5 w-5 accent-slate-950;
+}
+
+.metronome-tool__control {
+  @apply mt-4 w-full;
+}
+
+.piano-tool {
+  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-none sm:p-5;
+}
+
+.piano-tool__header {
+  @apply flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+}
+
+.piano-tool h3 {
+  @apply text-xl font-black text-slate-950;
+}
+
+.piano-tool__status {
+  @apply inline-flex h-9 shrink-0 items-center gap-2 rounded-full bg-slate-100 px-3 text-sm font-bold text-slate-600;
+}
+
+.piano-tool__status svg {
+  @apply h-4 w-4;
+}
+
+.piano-tool__controls {
+  @apply mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-[1fr_auto_1fr] xl:items-end;
+}
+
+.piano-tool__controls label,
+.piano-tool__root {
+  @apply grid gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3;
+}
+
+.piano-tool__controls label span,
+.piano-tool__root span {
+  @apply text-xs font-bold uppercase tracking-[0.12em] text-slate-500;
+}
+
+.piano-tool__root strong {
+  @apply text-2xl font-black text-slate-950;
+}
+
+.piano-tool__controls select {
+  @apply h-11 rounded-lg border border-slate-300 bg-white px-3 text-base font-black text-slate-950 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-100;
+}
+
+.piano-tool__variations {
+  @apply grid gap-2 sm:grid-cols-2;
+}
+
+.piano-tool__scale {
+  @apply min-h-16;
+}
+
+.piano-tool__keyboard {
+  @apply relative mt-5 overflow-x-auto rounded-lg border border-slate-200 bg-slate-900 p-3;
+}
+
+.piano-tool__white-keys {
+  @apply grid min-w-[680px];
+  grid-template-columns: repeat(var(--white-key-count), minmax(0, 1fr));
+}
+
+.piano-tool__key {
+  @apply select-none touch-none transition;
+}
+
+.piano-tool__key--white {
+  @apply relative flex h-52 items-end justify-center rounded-b-md border border-slate-300 bg-white pb-3 text-xs font-black text-slate-500 hover:bg-sky-50 hover:text-slate-950;
+}
+
+.piano-tool__key--white + .piano-tool__key--white {
+  @apply -ml-px;
+}
+
+.piano-tool__key--black {
+  @apply absolute top-3 z-10 flex h-32 w-9 -translate-x-1/2 items-end justify-center rounded-b-md border border-slate-950 bg-slate-950 pb-2 text-[10px] font-black text-slate-300 hover:bg-slate-800;
+}
+
+.piano-tool__key--black span {
+  @apply pointer-events-none rotate-90;
+}
+
+.piano-tool__key--active.piano-tool__key--white {
+  @apply border-sky-400 bg-sky-100 text-sky-950;
+}
+
+.piano-tool__key--active.piano-tool__key--black {
+  @apply border-sky-300 bg-sky-500 text-white;
+}
+
+.piano-tool__cue {
+  @apply mt-4 rounded-lg border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-slate-600;
+}
+
+.practice-player .sound-tool {
+  @apply mt-4 border-white/10 bg-white/5 shadow-none;
+}
+
+.practice-player .sound-tool h3 {
+  @apply text-white;
+}
+
+.practice-player .sound-tool__icon {
+  @apply bg-sky-300 text-slate-950;
+}
+
+.exercise-prompt {
+  @apply mt-4 rounded-lg border p-4 text-base font-black leading-7 sm:text-lg;
+}
+
+.exercise-prompt--breath {
+  @apply border-sky-100 bg-sky-50 text-sky-950;
+}
+
+.exercise-prompt--body {
+  @apply border-amber-100 bg-amber-50 text-amber-950;
+}
+
+.exercise-prompt--syllable,
+.exercise-prompt--ear {
+  @apply border-indigo-100 bg-indigo-50 text-indigo-950;
+}
+
+.exercise-prompt--resonance {
+  @apply border-cyan-100 bg-cyan-50 text-cyan-950;
+}
+
+.exercise-prompt--range {
+  @apply border-emerald-100 bg-emerald-50 text-emerald-950;
+}
+
+.exercise-prompt--style {
+  @apply border-rose-100 bg-rose-50 text-rose-950;
+}
+
+.practice-cues {
+  @apply mt-4 grid gap-2;
+}
+
+.practice-cue {
+  @apply flex gap-3 rounded-lg border px-3 py-2 text-sm leading-6;
+}
+
+.practice-cue svg {
+  @apply mt-0.5 h-5 w-5 shrink-0;
+}
+
+.practice-cue strong {
+  @apply mr-2 font-black;
+}
+
+.practice-cue--safety {
+  @apply border-amber-200 bg-amber-50 text-amber-950;
+}
+
+.practice-cue--privacy {
+  @apply border-slate-200 bg-slate-50 text-slate-700;
+}
+
+.exercise-steps {
+  @apply mt-4 grid gap-3 text-slate-700;
+  counter-reset: exercise-step;
+}
+
+.exercise-steps li {
+  @apply flex gap-3 rounded-lg border border-slate-200 bg-white p-3 leading-7;
+  counter-increment: exercise-step;
+}
+
+.exercise-steps li::before {
+  @apply flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white;
+  content: counter(exercise-step);
+}
+
+.sound-tool {
+  @apply mt-4 rounded-lg border border-slate-200 bg-slate-950 p-4 text-white shadow-sm sm:p-5;
+}
+
+.sound-tool__header {
+  @apply flex items-start gap-3;
+}
+
+.sound-tool__icon {
+  @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sky-400 text-slate-950;
+}
+
+.sound-tool__icon svg {
+  @apply h-6 w-6;
+}
+
+.sound-tool h3 {
+  @apply text-xl font-black;
+}
+
+.sound-tool .eyebrow {
+  @apply mb-2 text-sky-200;
+}
+
+.sound-tool__description {
+  @apply mt-4 leading-7 text-slate-300;
+}
+
+.sound-readout {
+  @apply mt-4 flex min-h-20 items-center justify-center rounded-lg border border-white/10 bg-white/5 px-4 text-center text-2xl font-black text-sky-100 transition;
+}
+
+.sound-readout--active {
+  @apply border-sky-300 bg-sky-400/15 text-white;
+}
+
+.sound-controls {
+  @apply mt-4 grid gap-3 rounded-lg border border-white/10 bg-white/5 p-3;
+}
+
+.sound-control {
+  @apply grid gap-2 text-sm font-bold text-slate-200 sm:grid-cols-[7rem_1fr_3.25rem] sm:items-center;
+}
+
+.sound-control span {
+  @apply inline-flex items-center gap-2;
+}
+
+.sound-control svg {
+  @apply h-4 w-4;
+}
+
+.sound-control input[type="range"] {
+  @apply h-2 w-full cursor-pointer accent-sky-300;
+}
+
+.sound-control strong {
+  @apply text-right text-sky-100;
+}
+
+.sound-control--select {
+  @apply sm:grid-cols-[7rem_1fr];
+}
+
+.sound-control select {
+  @apply h-10 rounded-lg border border-white/10 bg-slate-900 px-3 text-sm font-black text-white outline-none focus:border-sky-300;
+}
+
+.sound-tool__meta {
+  @apply mt-3 flex flex-wrap gap-2;
+}
+
+.sound-tool__meta span {
+  @apply inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-bold text-slate-200;
+}
+
+.sound-tool__meta svg {
+  @apply h-4 w-4;
+}
+
+.voice-example-button {
+  @apply mt-4 inline-flex h-10 items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10;
+}
+
+.voice-example-button svg {
+  @apply h-4 w-4;
+}
+
+.sound-tool__actions {
+  @apply mt-5 flex flex-wrap gap-3;
+}
+
+.sound-tool .button--primary {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.sound-tool .button--ghost {
+  @apply border-white/15 bg-white/5 text-white hover:border-white/30 hover:text-white disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.video-modal {
+  @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+}
+
+.video-modal__backdrop {
+  @apply absolute inset-0 bg-slate-950/70;
+}
+
+.video-modal__panel {
+  @apply relative z-10 w-full max-w-3xl overflow-hidden rounded-lg border border-slate-200 bg-white shadow-2xl;
+}
+
+.video-modal__header {
+  @apply flex items-start justify-between gap-4 border-b border-slate-200 p-4 sm:p-5;
+}
+
+.video-modal__header h2 {
+  @apply text-xl font-black text-slate-950;
+}
+
+.video-modal__close {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:text-slate-950;
+}
+
+.video-modal__close svg {
+  @apply h-5 w-5;
+}
+
+.video-modal__body {
+  @apply grid bg-slate-50 lg:grid-cols-[17rem_1fr];
+}
+
+.video-modal__body--single {
+  @apply block;
+}
+
+.video-modal__list {
+  @apply grid max-h-64 gap-2 overflow-y-auto border-b border-slate-200 p-3 lg:max-h-none lg:border-b-0 lg:border-r;
+}
+
+.video-modal__option {
+  @apply rounded-lg border border-transparent bg-white p-3 text-left transition hover:border-slate-300;
+}
+
+.video-modal__option--active {
+  @apply border-sky-300 bg-sky-50;
+}
+
+.video-modal__option-title {
+  @apply block text-sm font-black leading-5 text-slate-950;
+}
+
+.video-modal__option-meta {
+  @apply mt-1 flex flex-wrap items-center gap-2 text-xs font-bold text-slate-500;
+}
+
+.video-modal__option-meta strong {
+  @apply rounded-full bg-red-100 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wide text-red-700;
+}
+
+.video-modal__frame {
+  @apply aspect-video bg-slate-950;
+}
+
+.video-modal__frame iframe {
+  @apply h-full w-full;
+}
+
+.video-modal__footer {
+  @apply flex flex-col gap-3 border-t border-slate-200 p-4 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between sm:p-5;
+}
+
+@keyframes breathBar {
+  0%,
+  100% {
+    transform: scaleY(0.65);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top left, rgb(125 211 252 / 0.1), transparent 34rem),
+    linear-gradient(180deg, #3f3f46 0%, #52525b 100%);
+  color: #fafafa;
+}
+
+.dark header {
+  @apply border-zinc-500/70 bg-zinc-700/90;
+}
+
+.dark .site-header__brand-copy strong,
+.dark header a {
+  @apply text-white;
+}
+
+.dark .site-header__brand-copy span {
+  @apply text-zinc-300;
+}
+
+.dark .site-header__mark {
+  @apply bg-zinc-900;
+}
+
+.dark .site-header__nav {
+  @apply bg-zinc-600;
+}
+
+.dark .site-header__nav button,
+.dark .site-header__nav a {
+  @apply text-zinc-100 hover:bg-zinc-500 hover:text-white;
+}
+
+.dark .tool-directory__header {
+  @apply border-zinc-600;
+}
+
+.dark .tool-directory__header h1,
+.dark .tool-card h3,
+.dark .tool-directory__empty h2 {
+  @apply text-white;
+}
+
+.dark .tool-directory__intro > p:last-child,
+.dark .tool-card__body > p,
+.dark .tool-directory__empty p {
+  @apply text-zinc-200;
+}
+
+.dark .tool-card,
+.dark .tool-card--planned,
+.dark .tool-directory__empty {
+  @apply border-zinc-500 bg-zinc-700;
+}
+
+.dark .tool-card--featured {
+  @apply border-rose-400/60 bg-gradient-to-br from-rose-950/40 via-zinc-700 to-zinc-700;
+  box-shadow:
+    inset 3px 0 0 #fb7185,
+    0 8px 24px rgb(0 0 0 / 0.18);
+}
+
+.dark .tool-card__featured-label {
+  @apply bg-rose-400/15 text-rose-200;
+}
+
+.dark a.tool-card:hover {
+  @apply border-zinc-400;
+}
+
+.dark .tool-card__category,
+.dark .tool-group__heading h2 {
+  @apply text-zinc-300;
+}
+
+.dark .tool-directory__search {
+  @apply border-zinc-500 bg-zinc-700 focus-within:border-sky-300 focus-within:ring-sky-900;
+}
+
+.dark .tool-directory__search input {
+  @apply text-white placeholder:text-zinc-400;
+}
+
+.dark .tool-directory__search > span:last-child,
+.dark .tool-group__heading span {
+  @apply bg-zinc-600 text-zinc-200;
+}
+
+.dark a.tool-card:hover .tool-card__arrow {
+  @apply text-white;
+}
+
+.dark .tool-directory__empty button {
+  @apply bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .opml-page__header h1,
+.dark .opml-section-heading h2 {
+  @apply text-white;
+}
+
+.dark .opml-page__header > p:last-child {
+  @apply text-zinc-200;
+}
+
+.dark .opml-workspace {
+  @apply border-zinc-500 bg-zinc-700;
+}
+
+.dark .opml-output {
+  @apply border-zinc-500 bg-zinc-600;
+}
+
+.dark .opml-feed-count {
+  @apply bg-zinc-600 text-zinc-200;
+}
+
+.dark .opml-draft-status {
+  @apply text-zinc-300;
+}
+
+.dark .opml-import-bar {
+  @apply border-zinc-500 bg-zinc-600;
+}
+
+.dark .opml-import-mode {
+  @apply bg-zinc-700;
+}
+
+.dark .opml-import-mode button {
+  @apply text-zinc-300 hover:text-white;
+}
+
+.dark .opml-import-mode button.is-active {
+  @apply bg-zinc-500 text-white;
+}
+
+.dark .opml-import,
+.dark .opml-clear-draft {
+  @apply border-zinc-400 bg-zinc-700 text-white hover:border-zinc-300 hover:bg-zinc-600 hover:text-white;
+}
+
+.dark .opml-import-status {
+  @apply text-emerald-200;
+}
+
+.dark .opml-import-status--error {
+  @apply text-rose-200;
+}
+
+.dark .opml-field > span {
+  @apply text-zinc-200;
+}
+
+.dark .opml-field input {
+  @apply border-zinc-400 bg-zinc-700 text-white placeholder:text-zinc-400 focus:border-sky-300 focus:ring-sky-400/20;
+}
+
+.dark .opml-field small,
+.dark .opml-form-error {
+  @apply text-rose-200;
+}
+
+.dark .opml-feed-row {
+  @apply border-zinc-500 bg-zinc-600;
+}
+
+.dark .opml-feed-row legend {
+  @apply text-zinc-300;
+}
+
+.dark .opml-remove-feed {
+  @apply text-zinc-300 hover:bg-rose-400/10 hover:text-rose-200;
+}
+
+.dark .opml-add-feed,
+.dark .opml-copy {
+  @apply border-zinc-400 bg-zinc-700 text-white hover:border-zinc-300 hover:text-white;
+}
+
+.dark .opml-privacy-note {
+  @apply border-sky-400/30 bg-sky-400/10 text-sky-100;
+}
+
+.dark .opml-preview {
+  @apply bg-zinc-900 text-zinc-200;
+}
+
+.dark .opml-download {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .line-sorter-page__header h1,
+.dark .line-sorter-pane h2 {
+  @apply text-white;
+}
+
+.dark .line-sorter-page__header > p:last-child {
+  @apply text-zinc-200;
+}
+
+.dark .line-sorter-workspace {
+  @apply border-zinc-500 bg-zinc-700;
+}
+
+.dark .line-sorter-controls,
+.dark .line-sorter-pane--result,
+.dark .line-sorter-privacy {
+  @apply border-zinc-500 bg-zinc-600;
+}
+
+.dark .line-sorter-controls > label:first-child span,
+.dark .line-sorter-check,
+.dark .line-sorter-privacy {
+  @apply text-zinc-200;
+}
+
+.dark .line-sorter-controls select,
+.dark .line-sorter-pane textarea,
+.dark .line-sorter-clear,
+.dark .line-sorter-actions button {
+  @apply border-zinc-400 bg-zinc-700 text-white placeholder:text-zinc-400;
+}
+
+.dark .line-sorter-segment {
+  @apply bg-zinc-700;
+}
+
+.dark .line-sorter-segment button {
+  @apply text-zinc-300 hover:text-white;
+}
+
+.dark .line-sorter-segment button.is-active {
+  @apply bg-zinc-500 text-white;
+}
+
+.dark .line-sorter-pane header > span {
+  @apply bg-zinc-600 text-zinc-200;
+}
+
+.dark .line-sorter-pane--result textarea {
+  @apply bg-zinc-900 text-zinc-100;
+}
+
+.dark .line-sorter-actions button.is-primary {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .line-sorter-error {
+  @apply text-rose-200;
+}
+
+.dark footer {
+  @apply border-zinc-600 bg-zinc-700;
+}
+
+.dark footer div {
+  @apply text-zinc-300;
+}
+
+.dark .footer-support {
+  @apply border-zinc-100 bg-zinc-100 text-zinc-950 hover:border-white hover:bg-white;
+}
+
+.dark .theme-toggle,
+.dark .language-switch__trigger,
+.dark .button--ghost,
+.dark .tools-list__item--active,
+.dark .workspace-switch__item--active,
+.dark .range-detector__target--active,
+.dark .range-detector__mode--active,
+.dark .video-modal__close {
+  @apply border-zinc-400 bg-zinc-600 text-zinc-50 hover:border-zinc-300 hover:bg-zinc-500 hover:text-white;
+}
+
+.dark .language-switch__menu {
+  @apply border-zinc-400 bg-zinc-600 shadow-zinc-800/30;
+}
+
+.dark .language-switch__option {
+  @apply text-zinc-100 hover:bg-zinc-500 hover:text-white;
+}
+
+.dark .language-switch__option span {
+  @apply text-zinc-400;
+}
+
+.dark .language-switch__option--active {
+  @apply bg-sky-300 text-slate-950 hover:bg-sky-300 hover:text-slate-950;
+}
+
+.dark .language-switch__option--active span {
+  @apply text-zinc-700;
+}
+
+.dark .button--primary {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .eyebrow {
+  @apply text-sky-300;
+}
+
+.dark .training-hero h1,
+.dark .hero-session__top h2,
+.dark .topic-panel h2,
+.dark .exercise-panel h2,
+.dark .tools-section__header h2,
+.dark .range-detector h3,
+.dark .range-detector__manual-heading h4,
+.dark .metronome-tool h3,
+.dark .piano-tool h3,
+.dark .video-modal__header h2 {
+  @apply text-white;
+}
+
+.dark .training-hero p:not(.eyebrow),
+.dark .topic-section__header p:not(.eyebrow),
+.dark .tools-section__header p:not(.eyebrow),
+.dark .topic-panel__concept,
+.dark .guidance-box,
+.dark .range-detector__cue,
+.dark .metronome-tool__cue,
+.dark .metronome-tool__toggle,
+.dark .piano-tool__cue,
+.dark .video-modal__footer,
+.dark .video-modal__option-meta,
+.dark .video-modal__option-meta {
+  @apply text-zinc-200;
+}
+
+.dark .training-hero,
+.dark .hero-session,
+.dark .topic-section,
+.dark .exercise-picker--standalone,
+.dark .tools-section,
+.dark .topic-panel,
+.dark .exercise-panel,
+.dark .range-detector,
+.dark .metronome-tool,
+.dark .piano-tool,
+.dark .video-modal__panel {
+  @apply border-zinc-500 bg-zinc-700 shadow-sm;
+}
+
+.dark .hero-session__meta span,
+.dark .hero-session__checklist span {
+  @apply border-zinc-500 bg-zinc-600 text-zinc-100;
+}
+
+.dark .video-modal__body {
+  @apply bg-zinc-600;
+}
+
+.dark .video-modal__list {
+  @apply border-zinc-500;
+}
+
+.dark .topic-pill,
+.dark .exercise-picker__item,
+.dark .range-detector__readout div,
+.dark .range-detector__manual-heading,
+.dark .range-detector__manual-setters label,
+.dark .range-detector__manual-results div,
+.dark .range-detector__range-slider,
+.dark .metronome-tool__display button,
+.dark .metronome-tool__display label,
+.dark .metronome-tool__settings label:not(.metronome-tool__toggle),
+.dark .piano-tool__controls label,
+.dark .piano-tool__root,
+.dark .range-detector__manual-guide,
+.dark .video-modal__option,
+.dark .exercise-steps li,
+.dark .topic-visual,
+.dark .metronome-tool__toggle {
+  @apply border-zinc-400 bg-zinc-600 text-zinc-50;
+}
+
+.dark .topic-pill:hover,
+.dark .exercise-picker__item:hover,
+.dark .video-modal__option:hover,
+.dark .metronome-tool__display button:hover,
+.dark .metronome-tool__beats button:hover,
+.dark .piano-tool__key--white:hover {
+  @apply border-zinc-400 text-white;
+}
+
+.dark .topic-pill--active,
+.dark .exercise-picker__item--active {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:border-sky-300 hover:text-slate-950;
+}
+
+.dark .metronome-tool__beat--active {
+  @apply border-amber-300 bg-amber-300 text-slate-950;
+}
+
+.dark .video-modal__option--active {
+  @apply border-sky-300 bg-sky-300 text-slate-950;
+}
+
+.dark .video-modal__option--active .video-modal__option-title,
+.dark .video-modal__option--active .video-modal__option-meta {
+  @apply text-slate-950;
+}
+
+.dark .video-modal__option-title {
+  @apply text-slate-50;
+}
+
+.dark .video-modal__option-meta strong {
+  @apply bg-red-500/20 text-red-100;
+}
+
+.dark .video-modal__option--active .video-modal__option-title,
+.dark .video-modal__option--active .video-modal__option-meta {
+  @apply text-slate-950;
+}
+
+.dark .workspace-switch,
+.dark .tools-list,
+.dark .range-detector__modes,
+.dark .sound-controls {
+  @apply bg-zinc-600;
+}
+
+.dark .workspace-switch button,
+.dark .tools-list__item,
+.dark .range-detector__modes button {
+  @apply text-zinc-100 hover:bg-zinc-500 hover:text-white;
+}
+
+.dark .range-detector__readout span,
+.dark .range-detector__manual-setters label > span,
+.dark .range-detector__range-labels span {
+  @apply text-zinc-300;
+}
+
+.dark .topic-pill__order,
+.dark .checkpoints span,
+.dark .range-detector__manual-heading > span,
+.dark .range-detector__range-values strong {
+  @apply border-zinc-400 bg-zinc-500 text-zinc-50;
+}
+
+.dark .range-detector__manual-results div {
+  @apply text-zinc-100;
+}
+
+.dark .range-detector__manual-results svg {
+  @apply text-zinc-400;
+}
+
+.dark .topic-panel__icon {
+  @apply bg-sky-400/15 text-sky-200;
+}
+
+.dark .guidance-box {
+  @apply border-sky-400/20 bg-sky-400/10;
+}
+
+.dark .topic-visual {
+  @apply bg-zinc-600;
+}
+
+.dark .timer-badge {
+  @apply bg-white/10 text-amber-100;
+}
+
+.dark .practice-player,
+.dark .sound-tool {
+  @apply border-zinc-500 bg-zinc-700;
+}
+
+.dark .practice-cue--safety {
+  @apply border-amber-400/30 bg-amber-400/10 text-amber-100;
+}
+
+.dark .practice-cue--privacy {
+  @apply border-zinc-400 bg-zinc-600 text-zinc-100;
+}
+
+.dark .exercise-steps {
+  @apply text-zinc-300;
+}
+
+.dark .exercise-steps li::before {
+  @apply bg-sky-300 text-slate-950;
+}
+
+.dark .exercise-prompt--breath,
+.dark .exercise-prompt--body,
+.dark .exercise-prompt--syllable,
+.dark .exercise-prompt--ear,
+.dark .exercise-prompt--resonance,
+.dark .exercise-prompt--range,
+.dark .exercise-prompt--style {
+  @apply border-zinc-700 bg-zinc-800 text-zinc-100;
+}
+
+.dark .range-detector__status,
+.dark .metronome-tool__status,
+.dark .piano-tool__status {
+  @apply bg-zinc-600 text-zinc-100;
+}
+
+.dark .range-detector__status--active {
+  @apply bg-sky-400/15 text-sky-200;
+}
+
+.dark .metronome-tool__status--active {
+  @apply bg-amber-400/15 text-amber-200;
+}
+
+.dark .range-detector__manual-setters strong,
+.dark .range-detector__manual-results strong,
+.dark .range-detector__readout strong,
+.dark .metronome-tool__display label strong,
+.dark .piano-tool__root strong {
+  @apply text-white;
+}
+
+.dark .range-detector__manual-setters select {
+  @apply border-zinc-400 bg-zinc-700 text-white focus:border-sky-300 focus:ring-sky-400/20;
+}
+
+.dark .range-detector__note-stepper button {
+  @apply border-zinc-400 bg-zinc-700 text-zinc-100 hover:border-zinc-300 hover:text-white disabled:opacity-40;
+}
+
+.dark .range-detector__note-stepper button:nth-child(2) {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .metronome-tool__settings select,
+.dark .piano-tool__controls select {
+  @apply border-zinc-400 bg-zinc-700 text-white focus:border-sky-300 focus:ring-sky-400/20;
+}
+
+.dark .metronome-tool__display input[type="range"] {
+  @apply accent-sky-300;
+}
+
+.dark .piano-tool__keyboard {
+  @apply border-zinc-400 bg-zinc-700;
+}
+
+.dark .piano-tool__key--white {
+  @apply border-zinc-600 bg-zinc-100 text-zinc-600 hover:bg-zinc-200 hover:text-zinc-950;
+}
+
+.dark .piano-tool__key--black {
+  @apply border-zinc-800 bg-zinc-800 text-zinc-100 hover:bg-zinc-600;
+}
+
+.dark .piano-tool__key--active.piano-tool__key--white {
+  @apply border-sky-300 bg-sky-200 text-slate-950;
+}
+
+.dark .piano-tool__key--active.piano-tool__key--black {
+  @apply border-sky-300 bg-sky-500 text-white;
+}
+
+.dark .piano-tool__cue {
+  @apply border-sky-400/20 bg-sky-400/10;
+}
+
+.dark .range-detector__range-track {
+  @apply bg-zinc-500;
+}
+
+.dark .range-detector__range-fill {
+  @apply bg-sky-300;
+}
+
+.dark .range-detector__summary {
+  @apply bg-zinc-600 text-white;
+}
+
+.dark .range-detector__error {
+  @apply border-rose-400/30 bg-rose-400/10 text-rose-200;
+}
+
+.dark .range-detector__range-control input::-webkit-slider-thumb {
+  @apply border-sky-300 bg-zinc-600;
+}
+
+.dark .range-detector__range-control input::-moz-range-thumb {
+  @apply border-sky-300 bg-zinc-600;
+}
+
+.dark .player-button--primary {
+  @apply border-sky-300 bg-sky-300 text-slate-950 hover:bg-sky-200;
+}
+
+.dark .player-button {
+  @apply border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/15;
+}
+
+.dark .player-button--video {
+  @apply border-red-300 bg-red-500 text-white hover:bg-red-400;
+}
+
+.dark .video-modal__header,
+.dark .video-modal__footer {
+  @apply border-zinc-600;
+}
+
+@media (max-width: 640px) {
+  .training-hero h1 {
+    @apply text-4xl;
+  }
+}
